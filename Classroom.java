@@ -28,7 +28,7 @@ public class Classroom {
     /** 
     * Using length and width, you can find the amount of students to fit in this room.
     * @return       Maximum amount of students/TA's that can fit into this classroom.
-	*/
+    */
     public int getMaxOccupancy()
     {
         return length*width/4;
@@ -40,7 +40,7 @@ public class Classroom {
     * @param    startTime   
     * @param    endTime     
     * @return               True if room is occupied at the given day, start time, and end time.
-	*/
+    */
     public bool isOccupied(String day, int startTime, int endTime)
     {
         for (int i = 0; i < sectionsInRoom.size(); i++) 
@@ -59,9 +59,9 @@ public class Classroom {
     
     /** 
     * Assesses whether or not this classroom can host the given lab (check if resources, maxOccupancy match)
-	* @param	labSection   CourseSection object containing information
+    * @param	labSection   CourseSection object containing information
     * @return                True if classroom can host the lab, False if requirements are not met.
-	*/
+    */
     public bool isCompatible(CourseSection labSection)
     {
         String day = labSection.getDay();
