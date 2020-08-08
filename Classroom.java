@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Classroom {
     
     private String roomNum;
@@ -46,11 +48,11 @@ public class Classroom {
     * @param    endTime     
     * @return               True if room is occupied at the given day, start time, and end time.
     */
-    public bool isOccupied(String day, int startTime, int endTime)
+    public boolean isOccupied(String day, int startTime, int endTime)
     {
         for (int i = 0; i < sectionsInRoom.size(); i++) 
         {
-            CourseSection sectionToCompare = sectionsInRoom.at(i); //is this the syntax to grab smth from arraylist? :(((
+            CourseSection sectionToCompare = sectionsInRoom.get(i); //is this the syntax to grab smth from arraylist? :(((
             if (sectionToCompare.getDay().equalsIgnoreCase(day))
             {
                 //if (sectionToCompare times overlap with start and end times)
@@ -67,7 +69,7 @@ public class Classroom {
     * @param	labSection   CourseSection object containing information
     * @return                True if classroom can host the lab, False if requirements are not met.
     */
-    public bool isCompatible(CourseSection labSection)
+    public boolean isCompatible(CourseSection labSection)
     {
         String day = labSection.getDay();
         int start = labSection.getStartTime();
@@ -81,7 +83,7 @@ public class Classroom {
         {
             return false; //too many students for classroom, therefore not compatible
         }
-        if (labSection.super.needsComputer() == true)
+        if (labSection.needComputer() == true)
         {
             if (this.hasComputer() == false)
             {

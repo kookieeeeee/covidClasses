@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class CourseSection extends Course
 {
     int sectionNumber; //could be string ex. Section 1 vs "01"
@@ -6,10 +8,10 @@ public class CourseSection extends Course
     int studentCount;
     String roomName;
 
-    public class CourseSection(int courseCode, boolean needsComputer, int TAC, int labDuration, int sectionNumber, String day, int startTime)
+    public CourseSection(String courseCode, boolean needsComputer, int TAC, int labDuration, int sectionNumber, String day, int startTime)
     {
         super(courseCode, needsComputer, TAC, labDuration); //in Course constructor
-        this.sectionNumber = sectionNumber
+        this.sectionNumber = sectionNumber;
         this.day = day;
         this.startTime = startTime;
         this.studentCount = 0; //looking for this value in updateStudentCount function
@@ -45,7 +47,7 @@ public class CourseSection extends Course
     * Finds the end time of the lab section.
     * @return    Lab end time (in hours ex. 14 for 2:00 PM)
     */
-    private int getEndTime ()
+    public int getEndTime ()
     {
         return this.getStartTime() + super.getDuration();
     }

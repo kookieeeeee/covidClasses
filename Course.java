@@ -15,7 +15,6 @@ public class Course {
         needComputer = useComputer;
         tac = numberOfTA;
         duration = labDuration;
-        labSections = new TreeMap<>();
     }
 
     public String getCourseCode()
