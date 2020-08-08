@@ -61,9 +61,10 @@ public class Course {
         for (int i = 0; i < students.size(); i++)
         {
             Student s = students.get(i);
-            if(s.getCourse1().equals(this.courseCode) || s.getCourse2().equals(this.courseCode) || s.getCourse3().equals(this.courseCode))
+            ArrayList<Course> allCourses = s.getCourses();
+            for (Course c : allCourses)
             {
-                sCount+=1;
+                if (c.getCourseCode().equalsIgnoreCase(this.courseCode)) sCount ++;
             }
         }
         return sCount;

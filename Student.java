@@ -1,18 +1,15 @@
+import java.util.ArrayList;
 public class Student
 {
     private String name;
     private String id;
-    private Course course1;
-    private Course course2;
-    private Course course3;
+    private ArrayList<Course> courses;
 
-    public Student(String name, String id, Course course1, Course course2, Course course3)
+    public Student(String name, String id, ArrayList<Course> courses)
     {
         this.name = name;
         this.id = id;
-        this.course1 = course1;
-        this.course2 = course2;
-        this.course3 = course3;
+        this.courses = courses;
     }
 
     public String getName()
@@ -26,18 +23,9 @@ public class Student
         return id;
     }
     
-    public Course getCourse1()
+    public ArrayList<Course> getCourses()
     {
-        return course1;
+        return courses;
     }
 
-    public Course getCourse2()
-    {
-        return course2;
-    }
-    
-    public Course getCourse3()
-    {
-        return course3;
-    }
 }

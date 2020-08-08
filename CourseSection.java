@@ -4,7 +4,7 @@ public class CourseSection extends Course
 {
     int sectionNumber; //could be string ex. Section 1 vs "01"
     int studentCount; //not in constructor
-    String room; //not in constructor
+    private String room; //not in constructor
     private int startTime;      //in hours (ex. 14 = "2:00 PM")
     private int endTime;
     private String day;         //ex. "Mon", ..., "Thu", ...
@@ -62,11 +62,12 @@ public class CourseSection extends Course
     {
         for (int i = 0; i < rooms.size(); i++)
         {
-            this.studentCount = rooms.get(i).getMaxOccupancy() - this.getNumberOfTA(); //TEMPORARILY set num of students in section as room max occupancy minus TA count
+            this.studentCount = rooms.get(i).getMaxOccupancy() - 1; //TEMPORARILY set num of students in section as room max occupancy minus TA count (only need 1 TA for one section)
             if (rooms.get(i).isCompatible(this)) //if it works
             {
                 rooms.get(i).addSection(this);
                 removeStudents(this.studentCount); //remove students in this course section from course total student count
+                this.room = rooms.get(i).getRoomNumber();
                 return rooms.get(i).getRoomNumber(); //this room is available
             }
         }
