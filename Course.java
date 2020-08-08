@@ -38,9 +38,19 @@ public class Course {
         return tac;
     }
 
-    public int getDuration()
+    public String day()
     {
-        return duration;
+        return day;
+    }
+    
+    public int startTime()
+    {
+        return startTime;
+    }
+    
+    public String endTime()
+    {
+        return endTime;
     }
     
     /** 
