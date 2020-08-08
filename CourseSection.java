@@ -75,8 +75,11 @@ public class CourseSection extends Course
     {
         for (int i = 0; i < rooms.size(); i++)
         {
-            //if room suits all course needs (time, materials, availability):
-                return rooms.getRoomNumber()
+            if (rooms.get(i).isCompatible(this))
+            {
+                rooms.get(i).addSection(this);
+                return rooms.get(i).getRoomNumber();
+            }
         }
         return "";
     }
