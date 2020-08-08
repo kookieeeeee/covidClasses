@@ -5,6 +5,7 @@ public class Course {
     private String courseCode;   
     private boolean needComputer;
     private int tac;            //number of TA per course section
+    private String day;         //ex. "Mon", ..., "Thu", ...
     private int startTime;      //in hours (ex. 14 = "2:00 PM")
     private int endTime;
     private int totalStudentCount;
