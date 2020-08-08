@@ -10,7 +10,10 @@ public class Registry {
             Scanner scanner = new Scanner(new File("studentInfo.txt"));
             while (scanner.hasNextLine())
             {
-                
+                String line = scanner.nextLine();
+                Scanner sc = new Scanner(line);
+                String name = sc.next();
+                String id = sc.next();
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
