@@ -1,4 +1,4 @@
-import java.util.TreeMap;
+import java.util.ArrayList;
 
 public class Course {
 
@@ -38,21 +38,25 @@ public class Course {
         return tac;
     }
 
-    public String day()
+    public String getDay()
     {
         return day;
     }
     
-    public int startTime()
+    public int getStartTime()
     {
         return startTime;
     }
     
-    public String endTime()
+    public int getEndTime()
     {
         return endTime;
     }
     
+    public void removeStudents(int numOfStudents)
+    {
+        totalStudentCount -= numOfStudents;
+    }
     /** 
     * Goes through all student objects and returns number of students in this course.
     * @param	students    Arraylist of all student objects

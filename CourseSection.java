@@ -26,12 +26,12 @@ public class CourseSection extends Course
     
     public String getRoomName()
     {
-        return this.roomName;
+        return this.room;
     }
 
-    public String setRoomName(String roomName)
+    public void setRoomName(String roomName)
     {
-        this.roomName = roomName;
+        this.room = roomName;
     }
 
     /** 
@@ -47,7 +47,7 @@ public class CourseSection extends Course
             if (rooms.get(i).isCompatible(this)) //if it works
             {
                 rooms.get(i).addSection(this);
-                super.totalStudentCount-=this.studentCount; //remove students in this course section from course total student count
+                super.removeStudents(this.studentCount); //remove students in this course section from course total student count
                 return rooms.get(i).getRoomNumber(); //this room is available
             }
         }
