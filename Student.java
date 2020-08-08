@@ -1,1 +1,3 @@
-class Student {}
+class Student {
+system.out.println("Hello guys");
+}
