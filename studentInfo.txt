@@ -1,4 +1,3 @@
-//names of students (let's start with 10)
 JohnSmith 56789 MTH110 CPS209 CPS310
 GeorgeMathew 45321 CHY103 CPS109 MTH110
 HannahBaker 66080 MTH108 CPS310 BLG144
