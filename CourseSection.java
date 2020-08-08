@@ -1,6 +1,6 @@
 public class CourseSection extends Course
 {
-    int sectionNumber;
+    int sectionNumber; //could be string ex. Section 1 vs "01"
     String day; //days (Mon, Fri)
     int startTime; //hours (0-24)
     int studentCount;
@@ -12,17 +12,42 @@ public class CourseSection extends Course
         this.sectionNumber = sectionNumber
         this.day = day;
         this.startTime = startTime;
-        this.studentCount = 0; //default value upon initialization, will be looking for this value
-        this.roomName = ""; //default value upon initialization
+        this.studentCount = 0; //looking for this value in updateStudentCount function
+        this.roomName = ""; //looking for this value in findRoom function
     }
 
+    public int getSectionNumber() //could be string
+    {
+        return sectionNumber;
+    }
+    
+    public String getDay()
+    {
+        return day;
+    }
+    
+    public int getStartTime()
+    {
+        return this.startTime;
+    }
+    
+    public int getStudentCount()
+    {
+        return this.studentCount;
+    }
+    
+    public String getRoomName()
+    {
+        return this.roomName;
+    }
+    
     /** 
     * Finds the end time of the lab section.
     * @return    Lab end time (in hours ex. 14 for 2:00 PM)
     */
     private int getEndTime ()
     {
-        return this.startTime + super.getDuration();
+        return this.getStartTime() + super.getDuration();
     }
 
     /** 
@@ -51,7 +76,7 @@ public class CourseSection extends Course
         for (int i = 0; i < rooms.size(); i++)
         {
             //if room suits all course needs (time, materials, availability):
-                // return rooms.getRoomNumber()
+                return rooms.getRoomNumber()
         }
         return "";
     }
