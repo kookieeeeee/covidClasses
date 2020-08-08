@@ -11,11 +11,12 @@ public class Course {
     private int totalStudentCount;
     private ArrayList<CourseSection> sections;
 
-    public Course(String code, boolean useComputer, int numberOfTA, int startTime, int endTime)
+    public Course(String code, boolean useComputer, int numberOfTA, String day, int startTime, int endTime)
     {
         courseCode = code;
         needComputer = useComputer;
         tac = numberOfTA;
+        this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         totalStudentCount = 0; //default value
