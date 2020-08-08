@@ -25,6 +25,11 @@ public class Classroom {
         return hasComputer;
     }
 
+    public void addSection (CourseSection section)
+    {
+        sectionsInRoom.add(section); //syn t t t ax?
+    }
+    
     /** 
     * Using length and width, you can find the amount of students to fit in this room.
     * @return       Maximum amount of students/TA's that can fit into this classroom.
