@@ -14,7 +14,7 @@ public class Classroom {
         this.length = length;
         this.width = width;
         this.hasComputer = hasComputer;
-        this.sectionsInRoom = new ArrayList<CourseSection>(); //guys is this the syntax??? :(
+        this.sectionsInRoom = new ArrayList<CourseSection>();
     }
 
     public String getRoomNumber()
@@ -52,13 +52,17 @@ public class Classroom {
     {
         for (int i = 0; i < sectionsInRoom.size(); i++) 
         {
-            CourseSection sectionToCompare = sectionsInRoom.get(i); //is this the syntax to grab smth from arraylist? :(((
+            CourseSection sectionToCompare = sectionsInRoom.get(i);
             if (sectionToCompare.getDay().equalsIgnoreCase(day))
             {
-                //if (sectionToCompare times overlap with start and end times)
-                //{
-                    return true; //room IS occupied
-                //}
+                if (sectionToCompare.getStartTime() > startTime && sectionToCompare.getStartTime() < endTime)
+                {
+                    return true;
+                }
+                if (sectionToCompare.getEndTime() > startTime && sectionToCompare.getStartTime() < endTime)
+                {
+                    return true;
+                }
             }
         }
         return false; //no overlap, room is not occupied between start and endtime of given day
@@ -79,16 +83,14 @@ public class Classroom {
         {
             return false; //this room is in use, therefore not compatible
         }
-        if (labSection.getStudentCount() > this.getMaxOccupancy())
+        if (labSection.getStudentCount() > this.getMaxOccupancy()) 
         {
             return false; //too many students for classroom, therefore not compatible
         }
-        if (labSection.needComputer() == true)
+        if (labSection.needComputer() == !this.hasComputer)
         {
-            if (this.hasComputer() == false)
-            {
-                return false;
-            }
+            return false;
+            
         }
         
         //any other missing cases 

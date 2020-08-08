@@ -5,20 +5,16 @@ public class Course {
     private String courseCode;   
     private boolean needComputer;
     private int tac;            //number of TA per course section
-    private String day;         //ex. "Mon", ..., "Thu", ...
-    private int startTime;      //in hours (ex. 14 = "2:00 PM")
-    private int endTime;
+    private int duration;
     private int totalStudentCount;
     private ArrayList<CourseSection> sections;
 
-    public Course(String code, boolean useComputer, int numberOfTA, String day, int startTime, int endTime)
+    public Course(String code, boolean useComputer, int numberOfTA, int duration)
     {
         courseCode = code;
         needComputer = useComputer;
+        this.duration = duration;
         tac = numberOfTA;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
         totalStudentCount = 0; //default value
         sections = new ArrayList<>(); //default value
     }
@@ -37,26 +33,23 @@ public class Course {
     {
         return tac;
     }
+    
+    public int getDuration()
+    {
+        return duration;
+    }
 
-    public String getDay()
+
+    public void setTotalStudentCount(int numberOfStudents)
     {
-        return day;
-    }
-    
-    public int getStartTime()
-    {
-        return startTime;
-    }
-    
-    public int getEndTime()
-    {
-        return endTime;
+        totalStudentCount = numberOfStudents;
     }
     
     public void removeStudents(int numOfStudents)
     {
         totalStudentCount -= numOfStudents;
     }
+
     /** 
     * Goes through all student objects and returns number of students in this course.
     * @param	students    Arraylist of all student objects

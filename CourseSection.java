@@ -5,10 +5,15 @@ public class CourseSection extends Course
     int sectionNumber; //could be string ex. Section 1 vs "01"
     int studentCount; //not in constructor
     String room; //not in constructor
+    private int startTime;      //in hours (ex. 14 = "2:00 PM")
+    private int endTime;
+    private String day;         //ex. "Mon", ..., "Thu", ...
 
-    public CourseSection(String courseCode, boolean needsComputer, int TAC, String day, int startTime, int endTime, int sectionNumber)
+    public CourseSection(Course course, String day, int startTime, int endTime, int sectionNumber)
     {
-        super(courseCode, needsComputer, TAC, day, startTime, endTime); //in Course constructor
+        super(course.getCourseCode(), course.needComputer(), course.getNumberOfTA(), course.getDuration()); //in Course constructor
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.sectionNumber = sectionNumber;
         this.studentCount = 0; //default value
         this.room = ""; //default value
@@ -27,6 +32,20 @@ public class CourseSection extends Course
     public String getRoomName()
     {
         return this.room;
+    }
+    public String getDay()
+    {
+        return day;
+    }
+    
+    public int getStartTime()
+    {
+        return startTime;
+    }
+    
+    public int getEndTime()
+    {
+        return endTime;
     }
 
     public void setRoomName(String roomName)
@@ -47,7 +66,7 @@ public class CourseSection extends Course
             if (rooms.get(i).isCompatible(this)) //if it works
             {
                 rooms.get(i).addSection(this);
-                super.removeStudents(this.studentCount); //remove students in this course section from course total student count
+                removeStudents(this.studentCount); //remove students in this course section from course total student count
                 return rooms.get(i).getRoomNumber(); //this room is available
             }
         }
