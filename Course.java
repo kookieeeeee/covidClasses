@@ -5,10 +5,9 @@ public class Course {
     private String courseCode;   
     private boolean needComputer;
     private int tac;            //number of TA
-    private int duration;       //in minutes (???)
-    private TreeMap<String, Classroom> labSections;
-    // private String labSection; //not sure if labSection should be in Course
-                                //because we can have different lab sections for the same Course
+    private int duration;       //in hours (bc counting minutes is a little cursed)
+    private TreeMap<String, CourseSection> labSections; //to support multiple course sections
+                   //Treemap : String (section name? ex. 01, 02) -> CourseSection (course section details)
 
     public Course(String code, boolean useComputer, int numberOfTA, int labDuration)
     {
