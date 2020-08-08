@@ -4,19 +4,21 @@ public class Course {
 
     private String courseCode;   
     private boolean needComputer;
-    private int tac;            //number of TA
-    private int duration;       //in hours (bc counting minutes is a little cursed)
+    private int tac;            //number of TA per course section
+    private int startTime;      //in hours (ex. 14 = "2:00 PM")
+    private int endTime;
     private int totalStudentCount;
-    //private TreeMap<String, CourseSection> labSections; //to support multiple course sections
-                   //Treemap : String (section name? ex. 01, 02) -> CourseSection (course section details)
+    private ArrayList<CourseSection> sections;
 
-    public Course(String code, boolean useComputer, int numberOfTA, int labDuration)
+    public Course(String code, boolean useComputer, int numberOfTA, int startTime, int endTime)
     {
         courseCode = code;
         needComputer = useComputer;
         tac = numberOfTA;
-        duration = labDuration;
-        totalStudentCount = 0; //
+        this.startTime = startTime;
+        this.endTime = endTime;
+        totalStudentCount = 0; //default value
+        sections = new ArrayList<>(); //default value
     }
 
     public String getCourseCode()
