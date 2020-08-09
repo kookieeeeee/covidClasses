@@ -15,16 +15,17 @@ public class Registry {
             {
                 String line = scanner.nextLine();
                 Scanner sc = new Scanner(line);
-                String code = sc.next();
+                String code = sc.next(); //class code eg. cps209
+                String sign = sc.next(); //for yes or no
                 boolean needComp = false;
-                if (sc.next().equalsIgnoreCase("yes"))
+                if (sign.equalsIgnoreCase("yes"))
                 {
                     needComp = true;
                 }
                 int tac = sc.nextInt();
                 int duration = sc.nextInt();
                 courses.add(new Course(code, needComp, tac, duration));
-
+                
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -35,7 +36,7 @@ public class Registry {
             Scanner scanner = new Scanner(new File("studentInfo.txt"));
             while (scanner.hasNextLine())
             {
-                String newline = scanner.nextLine();
+                String newline = scanner2.nextLine();
                 Scanner sc = new Scanner(newline);
                 String name = sc.next();
                 String id = sc.next();
@@ -45,23 +46,45 @@ public class Registry {
                     String code = sc.next();
                     for (Course c: courses)
                     {
-                        if (code.equalsIgnoreCase(c.getCourseCode())) takenCourses.add(c);
+                        if (code.equalsIgnoreCase(c.getCourseCode()) && isStringOnlyAlpha(code) == true) takenCourses.add(c);
                     }
                 }
-                students.add(new Student(name, id, takenCourses));
-                /**
-                Student s = registrynew.nextStudent(newline);
-                if(!s.equals(new Student("","", "", "", "")))
-                   {
-                       students.add(s.getId(), s.getName(), s.getCourse1(), s.getCourse2(), s.getCourse3());
-                   } 
-                   **/  
+                if (isNumeric(id) && isStringOnlyAlpha(name))
+                {
+                students.add(new Student(name, id, takenCourses)); 
+                }
             }
         } catch (Exception e) {
             System.out.println("studentInfo.txt: "+ "File Not Found Exception");        }
 
+    
 
-    }
+
+    try {
+        Scanner scanner = new Scanner(new File("rooms.txt"));
+        while (scanner.hasNextLine())
+        {
+            String line = scanner.nextLine();
+            Scanner sc = new Scanner(line);
+            String classroom = sc.next();
+            int length = sc.nextInt();
+            int width = sc.nextInt();
+            String sign = sc.next(); //for yes or no
+            boolean needComp = false;
+            ArrayList<CourseSection> sections = new ArrayList<CourseSection>();
+        
+            if (sign.equalsIgnoreCase("yes"))
+                {
+                    needComp = true;
+                }
+            rooms.add(new Classroom(classroom, length, width, needComp)); 
+        }
+
+    } 
+    catch (Exception e) {
+        System.out.println("studentInfo.txt: "+ "File Not Found Exception");        }
+
+
 
     public static boolean isNumeric(String str)
     { 
@@ -95,52 +118,5 @@ public class Registry {
         return true;
     } 
 
-    public Student nextStudent(String line) throws IOException
-    {
-        
-     Scanner line2 = new Scanner(line);
-     if (line2.hasNext())
-     {
-     String name = line2.next();
-     if (!line2.hasNext()) 
-     {
-         line2.close();
-         throw new IOException();  
-     }
-     if(line2.hasNext())
-     {
-     String id = line2.next();
-     }
-     if (line2.hasNext())
-     {
-         String course1 = line2.next();
-     }
- 
-     if (line2.hasNext())
-     {
-         String course2 = line2.next();
-     }
- 
-     if (line2.hasNext())
-     {
-         String course3 = line2.next();
-     }
- 
-     if (isStringOnlyAlpha(name) && isNumeric(id))
-         {
-             line2.close();
-             return new Student(name, id, course1, course2, course3);
-         }
-     else {
-             line2.close();
-             return new Student("", "", "", "", ""); 
-         }
- 
-     }
- 
-     line2.close();
-     return new Student("", "", "", "", "");
-    }
-
-
+}
 }
