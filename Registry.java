@@ -51,13 +51,14 @@ public class Registry {
                     String code = sc.next();
                     for (Course c: courses)
                     {
-                        if (code.equalsIgnoreCase(c.getCourseCode()) && isStringOnlyAlpha(code) == true) takenCourses.add(c);
+                        if (code.equalsIgnoreCase(c.getCourseCode()))
+                        {
+                            takenCourses.add(c);
+                        }
                     }
                 }
-                if (isNumeric(id) && isStringOnlyAlpha(name))
-                {
+                
                 students.add(new Student(name, id, takenCourses)); 
-                }
                 sc.close();
             }
         } catch (Exception e) {
@@ -87,7 +88,7 @@ public class Registry {
 
     } 
     catch (Exception e) {
-        System.out.println("studentInfo.txt: "+ "File Not Found Exception");        
+        System.out.println("rooms.txt: "+ "File Not Found Exception");        
     }
 
     for(Course c: courses)
@@ -103,19 +104,22 @@ public class Registry {
     for (Course c: courses)
     {
         int secNum = 1;
-        while(c.getTotalStudentCount() > 0)
+        countingloop: while(c.getTotalStudentCount() > 0)
         {
-            for (String day: days)
+            dayloop: for (String day: days)
             {
                 for (int hour = 800; hour <= 1800 - c.getDuration(); hour += 100)
                 {
                     CourseSection cSection = new CourseSection(c, day, hour, hour + c.getDuration(), secNum);
                     String roomNum = cSection.findRoom(rooms);
+                    System.out.println(roomNum);
+                    System.out.println(hour);
                     if (!roomNum.equalsIgnoreCase(""))
                     {
                         secNum++;
                         addSectionToRoom(cSection, roomNum);
                         c.addSection(cSection);
+                        continue countingloop;
                     }
 
                 }
@@ -125,37 +129,6 @@ public class Registry {
         }
     }
 }
-    public static boolean isStringOnlyAlpha(String str) 
-    { 
-        for (int i = 0; i < str.length(); i = i + 1)
-        {
-            if ((Character.isLetter(str.charAt(i))== false))
-            {
-                System.out.println("Invalid characters in Name " + str);
-                return false;
-            }
-        }
-        return true;
-    } 
-
-    public static boolean isNumeric(String str)
-    { 
-      if (str.length() != 5)
-      {
-          System.out.println("ID: " + str + " must be 5 numbers long" );
-          return false;
-      } 
-      for (int i = 0; i < str.length(); i = i + 1)
-      {
-          if ((Character.isDigit(str.charAt(i)) == false))
-          {
-              
-              System.out.println("Invalid characters in ID " + str);
-              return false;
-          }
-      }
-        return true;
-    }
 
     public static void addSectionToRoom(CourseSection s, String roomNum)
     {

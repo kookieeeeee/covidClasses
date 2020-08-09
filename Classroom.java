@@ -52,7 +52,12 @@ public class Classroom {
     {
         for (int i = 0; i < sectionsInRoom.size(); i++) 
         {
+            System.out.println("Hello in the for loop now");
             CourseSection sectionToCompare = sectionsInRoom.get(i);
+            System.out.println(sectionToCompare);
+            System.out.println(sectionToCompare.getDay());
+            System.out.println(sectionToCompare.getStartTime());
+            System.out.println(sectionToCompare.getEndTime());
             if (sectionToCompare.getDay().equalsIgnoreCase(day))
             {
                 if (sectionToCompare.getStartTime() > startTime && sectionToCompare.getStartTime() < endTime)

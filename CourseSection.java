@@ -15,6 +15,7 @@ public class CourseSection extends Course
         this.startTime = startTime;
         this.endTime = endTime;
         this.sectionNumber = sectionNumber;
+        this.day = day;
         this.studentCount = 0; //default value
         this.room = ""; //default value
     }
