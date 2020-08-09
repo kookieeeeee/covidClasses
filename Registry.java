@@ -96,27 +96,27 @@ public class Registry {
     days.add("Mon");
     days.add("Tue");
     days.add("Wed");
-    days.add("Thurs");
+    days.add("Thu");
     days.add("Fri");
     for (Course c: courses)
     {
+        int secNum = 1;
         for (String day: days)
         {
             for (int hour = 800; hour <= 1800 - c.getDuration(); hour += 100)
             {
-                CourseSection cSection = new CourseSection(c, day, hour, hour + c.getDuration(), hour)
+                while(this.totalStudentCount > 0)
+                {
+                    CourseSection cSection = new CourseSection(c, day, hour, hour + c.getDuration(), secNum);
+                    cSection.findroom(rooms);
+                    secNum ++;
+                }
                 
+
             }
         }
-
         
     }
-
-
-
-
-
-
 }
     public static boolean isStringOnlyAlpha(String str) 
     { 
@@ -150,3 +150,4 @@ public class Registry {
         return true;
     }
 }
+
