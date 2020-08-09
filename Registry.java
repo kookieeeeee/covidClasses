@@ -1,15 +1,17 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.Exception;
 import java.io.File;
 import java.io.IOException;
 
 public class Registry {
+    private static ArrayList<Student> students;
+    private static ArrayList<Course> courses;
+    private static ArrayList<Classroom> rooms;
     public static void main(String[] args) throws IOException{
-        ArrayList<Student> students = new ArrayList<Student>();
-        ArrayList<Course> courses = new ArrayList<Course>();
-        ArrayList<Classroom> rooms = new ArrayList<Classroom>();
+        students = new ArrayList<Student>();
+        courses = new ArrayList<Course>();
+        rooms = new ArrayList<Classroom>();
         //read courses file
         try {
             Scanner scanner = new Scanner(new File("courses.txt"));
@@ -101,21 +103,26 @@ public class Registry {
     for (Course c: courses)
     {
         int secNum = 1;
-        for (String day: days)
+        while(c.getTotalStudentCount() > 0)
         {
-            for (int hour = 800; hour <= 1800 - c.getDuration(); hour += 100)
+            for (String day: days)
             {
-                while(this.totalStudentCount > 0)
+                for (int hour = 800; hour <= 1800 - c.getDuration(); hour += 100)
                 {
                     CourseSection cSection = new CourseSection(c, day, hour, hour + c.getDuration(), secNum);
-                    cSection.findroom(rooms);
-                    secNum ++;
+                    String roomNum = cSection.findRoom(rooms);
+                    if (!roomNum.equalsIgnoreCase(""))
+                    {
+                        secNum++;
+                        addSectionToRoom(cSection, roomNum);
+                        c.addSection(cSection);
+                    }
+
                 }
                 
 
             }
         }
-        
     }
 }
     public static boolean isStringOnlyAlpha(String str) 
@@ -148,6 +155,17 @@ public class Registry {
           }
       }
         return true;
+    }
+
+    public static void addSectionToRoom(CourseSection s, String roomNum)
+    {
+        for (Classroom room: rooms)
+        {
+            if (roomNum.equalsIgnoreCase(room.getRoomNumber()))
+            {
+                room.addSection(s);
+            }
+        }
     }
 }
 

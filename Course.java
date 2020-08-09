@@ -39,6 +39,11 @@ public class Course {
         return duration;
     }
 
+    public int getTotalStudentCount()
+    {
+        return totalStudentCount;
+    }
+
 
     public void setTotalStudentCount(int numberOfStudents)
     {
@@ -48,6 +53,11 @@ public class Course {
     public void removeStudents(int numOfStudents)
     {
         totalStudentCount -= numOfStudents;
+    }
+
+    public void addSection(CourseSection cs)
+    {
+        sections.add(cs);
     }
 
     /** 
