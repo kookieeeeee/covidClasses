@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.Exception;
 import java.io.File;
@@ -8,6 +9,7 @@ public class Registry {
     public static void main(String[] args) throws IOException{
         ArrayList<Student> students = new ArrayList<Student>();
         ArrayList<Course> courses = new ArrayList<Course>();
+        ArrayList<Classroom> rooms = new ArrayList<Classroom>();
         //read courses file
         try {
             Scanner scanner = new Scanner(new File("courses.txt"));
@@ -25,6 +27,7 @@ public class Registry {
                 int tac = sc.nextInt();
                 int duration = sc.nextInt();
                 courses.add(new Course(code, needComp, tac, duration));
+                sc.close();
                 
             }
         } catch (Exception e) {
@@ -36,7 +39,7 @@ public class Registry {
             Scanner scanner = new Scanner(new File("studentInfo.txt"));
             while (scanner.hasNextLine())
             {
-                String newline = scanner2.nextLine();
+                String newline = scanner.nextLine();
                 Scanner sc = new Scanner(newline);
                 String name = sc.next();
                 String id = sc.next();
@@ -53,12 +56,12 @@ public class Registry {
                 {
                 students.add(new Student(name, id, takenCourses)); 
                 }
+                sc.close();
             }
         } catch (Exception e) {
-            System.out.println("studentInfo.txt: "+ "File Not Found Exception");        }
-
-    
-
+            System.out.println("studentInfo.txt: "+ "File Not Found Exception");        
+        }
+        
 
     try {
         Scanner scanner = new Scanner(new File("rooms.txt"));
@@ -71,20 +74,62 @@ public class Registry {
             int width = sc.nextInt();
             String sign = sc.next(); //for yes or no
             boolean needComp = false;
-            ArrayList<CourseSection> sections = new ArrayList<CourseSection>();
         
             if (sign.equalsIgnoreCase("yes"))
                 {
                     needComp = true;
                 }
             rooms.add(new Classroom(classroom, length, width, needComp)); 
+            sc.close();
         }
 
     } 
     catch (Exception e) {
-        System.out.println("studentInfo.txt: "+ "File Not Found Exception");        }
+        System.out.println("studentInfo.txt: "+ "File Not Found Exception");        
+    }
+
+    for(Course c: courses)
+    {
+        c.updateStudentCount(students);
+    }
+    ArrayList<String> days = new ArrayList<String>();
+    days.add("Mon");
+    days.add("Tue");
+    days.add("Wed");
+    days.add("Thurs");
+    days.add("Fri");
+    for (Course c: courses)
+    {
+        for (String day: days)
+        {
+            for (int hour = 800; hour <= 1800 - c.getDuration(); hour += 100)
+            {
+                CourseSection cSection = new CourseSection(c, day, hour, hour + c.getDuration(), hour)
+                
+            }
+        }
+
+        
+    }
 
 
+
+
+
+
+}
+    public static boolean isStringOnlyAlpha(String str) 
+    { 
+        for (int i = 0; i < str.length(); i = i + 1)
+        {
+            if ((Character.isLetter(str.charAt(i))== false))
+            {
+                System.out.println("Invalid characters in Name " + str);
+                return false;
+            }
+        }
+        return true;
+    } 
 
     public static boolean isNumeric(String str)
     { 
@@ -104,19 +149,4 @@ public class Registry {
       }
         return true;
     }
-
-    public static boolean isStringOnlyAlpha(String str) 
-    { 
-        for (int i = 0; i < str.length(); i = i + 1)
-        {
-            if ((Character.isLetter(str.charAt(i))== false))
-            {
-                System.out.println("Invalid characters in Name " + str);
-                return false;
-            }
-        }
-        return true;
-    } 
-
-}
 }

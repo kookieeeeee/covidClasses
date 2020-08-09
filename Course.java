@@ -55,7 +55,7 @@ public class Course {
     * @param	students    Arraylist of all student objects
     * @return               Number of students in this course
     */
-    public int updateStudentCount (ArrayList<Student> students)
+    public void updateStudentCount (ArrayList<Student> students)
     {
         int sCount = 0;
         for (int i = 0; i < students.size(); i++)
@@ -67,7 +67,7 @@ public class Course {
                 if (c.getCourseCode().equalsIgnoreCase(this.courseCode)) sCount ++;
             }
         }
-        return sCount;
+        totalStudentCount = sCount;
     }
     
     
